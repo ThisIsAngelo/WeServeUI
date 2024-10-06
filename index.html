@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Output Tailwind -->
+    <link rel="stylesheet" href="src/output.css" />
+
+    <!-- Website Icon Logo -->
+    <link rel="icon" href="public/assets/icon/logo.svg" />
+
+    <!-- Box Icon -->
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <!-- Alpine JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Website Title -->
+    <title>Weserve</title>
+  </head>
+  <body>
+    <header
+      class="fixed top-0 py-4 lg:py-7 w-full z-[99]"
+      x-data="{open: false, serviceOpen: false, scrolled: false}"
+      x-init="window.addEventListener('scroll', () => {
+        scrolled = window.scrollY > 0
+      })"
+      :class="{'backdrop-blur-[40px]' : scrolled}"
+    >
+      <div class="container">
+        <div class="relative flex w-full items-center justify-between">
+          <!-- Logo -->
+          <a href="" class="flex items-center gap-1">
+            <img
+              src="public/assets/icon/logo.svg"
+              alt="logo"
+              class="w-7 h-7 lg:w-8 lg:h-8"
+            />
+            <h1 class="font-bold text-[18px] lg:text-[22px]">weserve.</h1>
+          </a>
+
+          <!-- Main Nav -->
+          <nav class="hidden lg:flex">
+            <ul class="flex items-center gap-[30px]">
+              <li>
+                <a
+                  href="#"
+                  class="text-black hover:text-primary transition ease-linear duration-150 font-medium"
+                  >Products</a
+                >
+              </li>
+              <li class="relative">
+                <a
+                  @click="serviceOpen = !serviceOpen"
+                  class="cursor-pointer flex items-center justify-between text-black hover:text-primary transition ease-linear duration-150 font-medium"
+                >
+                  Services
+                  <box-icon
+                    name="chevron-down"
+                    class="transition ease-linear duration-150"
+                    :class="{'rotate-180': serviceOpen}"
+                  ></box-icon>
+                </a>
+                <!-- Servives -->
+                <ul
+                  @click.away="serviceOpen = false"
+                  x-show="serviceOpen"
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0 -translate-y-full"
+                  x-transition:enter-end="opacity-100 translate-y-0"
+                  x-transition:leave="transition ease-out duration-300"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-90"
+                  class="mt-2 flex flex-col gap-2 p-2 absolute top-full w-[150px] rounded-[14px] bg-white"
+                >
+                  <li
+                    class="cursor-pointer text-[15px] hover:bg-gray-100 p-1.5 rounded-md"
+                  >
+                    <a href="#">Extra Layers</a>
+                  </li>
+                  <li
+                    class="cursor-pointer text-[15px] hover:bg-gray-100 p-1.5 rounded-md"
+                  >
+                    <a href="#">Customizable</a>
+                  </li>
+                  <li
+                    class="cursor-pointer text-[15px] hover:bg-gray-100 p-1.5 rounded-md"
+                  >
+                    <a href="#">AI Automation</a>
+                  </li>
+                  <li
+                    class="cursor-pointer text-[15px] hover:bg-gray-100 p-1.5 rounded-md"
+                  >
+                    <a href="#">Auto Scaling</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-black hover:text-primary transition ease-linear duration-150 font-medium"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-black hover:text-primary transition ease-linear duration-150 font-medium"
+                  >Testimonials</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-black hover:text-primary transition ease-linear duration-150 font-medium"
+                  >Blog</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <!-- Bag -->
+            <button class="lg:p-1.5 xl:p-2 rounded-[50%] lg:bg-white">
+              <img
+                src="public/assets/icon/bag.svg"
+                alt="bag"
+                class="w-6 h-6 lg:w-7 lg:h-7"
+              />
+            </button>
+            <button
+              class="hidden lg:flex bg-black px-5 py-2 rounded-[100px] text-white"
+            >
+              Sign In
+            </button>
+
+            <!-- Hamburger Menu -->
+            <label class="lg:hidden">
+              <button
+                @click="open = !open"
+                class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center"
+              >
+                <div
+                  :class="{'rotate-[-45deg]': open}"
+                  class="w-[50%] h-[2px] bg-black rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem]"
+                ></div>
+                <div
+                  :class="{'hidden': open}"
+                  class="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-center"
+                ></div>
+                <div
+                  :class="{'rotate-[45deg]': open}"
+                  class="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem]"
+                ></div>
+              </button>
+            </label>
+          </div>
+
+          <!-- Mobile Navbar -->
+          <div
+            class="absolute lg:hidden top-full mt-4 bg-white border border-slate-300 shadow-xl w-full sm:w-1/2 sm:right-0 p-3 rounded-[18px]"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-0"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
+            x-show="open"
+            @click.away="open = false"
+          >
+            <ul class="flex flex-col gap-2">
+              <li
+                class="cursor-pointer p-2.5 hover:bg-gray-100 text-black font-medium rounded-md"
+              >
+                <a href="#">Product</a>
+              </li>
+              <li
+                class="cursor-pointer p-2.5 hover:bg-gray-100 text-black font-medium rounded-md"
+              >
+                <a
+                  @click="serviceOpen = !serviceOpen"
+                  class="flex items-center justify-between gap-1"
+                >
+                  Services
+                  <box-icon
+                    name="chevron-down"
+                    x-transition
+                    :class="{'rotate-180': serviceOpen}"
+                  ></box-icon>
+                </a>
+              </li>
+              <li>
+                <ul
+                  @click.away="serviceOpen = false"
+                  x-show="serviceOpen"
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0 -translate-y-full"
+                  x-transition:enter-end="opacity-100 translate-y-0"
+                  x-transition:leave="transition ease-out duration-300"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-90"
+                  class="flex flex-col gap-2 bg-gray-100 rounded-md"
+                >
+                  <li
+                    class="cursor-pointer text-[15px] rounded-md hover:bg-gray-300 hover:text-white p-2.5"
+                  >
+                    <a href="#">Extra Layers</a>
+                  </li>
+                  <li
+                    class="cursor-pointer text-[15px] rounded-md hover:bg-gray-300 hover:text-white p-2.5"
+                  >
+                    <a href="#">Customizable</a>
+                  </li>
+                  <li
+                    class="cursor-pointer text-[15px] rounded-md hover:bg-gray-300 hover:text-white p-2.5"
+                  >
+                    <a href="#">AI Automation</a>
+                  </li>
+                  <li
+                    class="cursor-pointer text-[15px] rounded-md hover:bg-gray-300 hover:text-white p-2.5"
+                  >
+                    <a href="#">Auto Scaling</a>
+                  </li>
+                </ul>
+              </li>
+              <li
+                class="cursor-pointer p-2.5 hover:bg-gray-100 text-black font-medium rounded-md"
+              >
+                <a href="#">Pricing</a>
+              </li>
+              <li
+                class="cursor-pointer p-2.5 hover:bg-gray-100 text-black font-medium rounded-md"
+              >
+                <a href="#">Testimonials</a>
+              </li>
+              <li
+                class="cursor-pointer p-2.5 hover:bg-gray-100 text-black font-medium rounded-md"
+              >
+                <a href="#">Blog</a>
+              </li>
+              <li
+                class="cursor-pointer p-2.5 hover:bg-gray-100 text-black font-medium rounded-md"
+              >
+                <a href="#">Sign In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen lg:min-h-[80vh] xl:min-h-screen flex items-center"
+    >
+      <div class="container">
+        <div
+          class="flex flex-col-reverse lg:flex-row items-center gap-14 mt-20 lg:mt-0"
+        >
+          <!-- Hero Text -->
+          <div class="flex flex-col items-center lg:items-start gap-10">
+            <!-- Hosting Information -->
+            <div class="flex items-center gap-1 p-2 bg-white rounded-[100px]">
+              <box-icon name="globe" class="w-5 h-5"></box-icon>
+              <p class="font-semibold text-[12px]">
+                We host more than 120,000 websites
+              </p>
+            </div>
+
+            <!-- Hero Title -->
+            <div class="flex flex-col text-center lg:text-start gap-[10px]">
+              <!-- Main Title -->
+              <h1
+                class="font-clash font-semibold text-[50px] lg:text-[60px] xl:text-[70px] 2xl:w-3/4 leading-[100%]"
+              >
+                Grow Online Business Faster.
+              </h1>
+              <!-- Sub Title -->
+              <p
+                class="font-medium text-gray-200 lg:leading-[32px] lg:w-3/4 xl:w-[65%]"
+              >
+                We provide a variety of servers to grow your users acquisition
+                much user-friendly and boosting up sales.
+              </p>
+            </div>
+
+            <!-- Hero Action -->
+            <div class="flex flex-col xs:flex-row items-center gap-4">
+              <button
+                class="bg-primary hover:bg-purple transition ease-linear duration-100 rounded-[100px] px-8 py-2 font-bold text-[18px] text-white"
+              >
+                Try Free Trial
+              </button>
+              <a
+                href="#"
+                class="text-primary font-semibold flex items-center underline"
+                ><img
+                  src="public/assets/icon/device-message.svg"
+                  alt="device-message"
+                  class="w-5 h-5"
+                />
+                Schedule a Demo</a
+              >
+            </div>
+          </div>
+
+          <!-- Hero Image -->
+          <div
+            class="flex justify-center sm:w-3/4 md:w-[65%] lg:w-3/4 xl:w-[65%] 2xl:w-1/2"
+          >
+            <img src="public/assets/hero-image.png" alt="hero-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Logo -->
+    <div class="my-[100px] lg:mt-0 lg:mb-[50px]">
+      <div class="container">
+        <div
+          class="w-full flex flex-wrap justify-center gap-4 md:gap-2 2xl:gap-0"
+        >
+          <div class="w-[45%] sm:w-[25%] lg:w-[15%] flex justify-center">
+            <img src="public/assets/brand/logo-1.svg" alt="logo-1" />
+          </div>
+          <div class="w-[45%] sm:w-[25%] lg:w-[15%] flex justify-center">
+            <img src="public/assets/brand/logo-2.svg" alt="logo-2" />
+          </div>
+          <div class="w-[45%] sm:w-[25%] lg:w-[15%] flex justify-center">
+            <img src="public/assets/brand/logo-3.svg" alt="logo-3" />
+          </div>
+          <div class="w-[45%] sm:w-[25%] lg:w-[15%] flex justify-center">
+            <img src="public/assets/brand/logo-4.svg" alt="logo-4" />
+          </div>
+          <div class="w-[45%] sm:w-[25%] lg:w-[15%] flex justify-center">
+            <img src="public/assets/brand/logo-5.svg" alt="logo-5" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Best Choice Section -->
+    <section class="my-16 lg:my-32">
+      <div class="container">
+        <div class="w-full flex flex-col gap-[30px]">
+          <!-- Section Title -->
+          <div class="w-full">
+            <h1
+              class="text-center text-black font-clash font-semibold text-[36px]"
+            >
+              Your Best Choice
+            </h1>
+          </div>
+
+          <!-- Card Container -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Choice Card -->
+            <div
+              class="bg-white py-[30px] px-6 rounded-2xl flex flex-col gap-8"
+            >
+              <div class="w-full">
+                <img
+                  src="public/assets/icon/best-choice/hierarchy-square.svg"
+                  alt="hierarchy-square"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <!-- Service Title -->
+                <h3
+                  class="font-bold text-[22px] xl:text-[26px] 2xl:text-[30px] text-black"
+                >
+                  Extra Layers
+                </h3>
+
+                <!-- Service Description -->
+                <p
+                  class="text-gray-200 font-medium xl:text-[20px] 2xl:text-[24px]"
+                >
+                  Making your project more secure avoiding DDoS
+                </p>
+              </div>
+
+              <div class="w-full">
+                <a
+                  href="#"
+                  class="text-primary xl:text-[18px] 2xl:text-[20px] hover:underline font-semibold"
+                  >Learn More</a
+                >
+              </div>
+            </div>
+
+            <!-- Choice Card -->
+            <div
+              class="bg-white py-[30px] px-6 rounded-2xl flex flex-col gap-8"
+            >
+              <div class="w-full">
+                <img
+                  src="public/assets/icon/best-choice/3dcube.svg"
+                  alt="3dcube"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <!-- Service Title -->
+                <h3
+                  class="font-bold text-[22px] xl:text-[26px] 2xl:text-[30px] text-black"
+                >
+                  Customizable
+                </h3>
+
+                <!-- Service Description -->
+                <p
+                  class="text-gray-200 font-medium xl:text-[20px] 2xl:text-[24px]"
+                >
+                  Only install what your business needs to grow
+                </p>
+              </div>
+
+              <div class="w-full">
+                <a
+                  href="#"
+                  class="text-primary xl:text-[18px] 2xl:text-[20px] hover:underline font-semibold"
+                  >Learn More</a
+                >
+              </div>
+            </div>
+
+            <!-- Choice Card -->
+            <div
+              class="bg-black py-[30px] px-6 rounded-2xl flex flex-col gap-8 relative before:absolute before:rotate-[35deg] before:h-[140px] before:w-[50px] before:left-40 xs:before:left-56 lg:before:left-44 xl:before:left-48 2xl:before:left-56 before:top-8 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-[34px] before:content-['']"
+            >
+              <div class="w-full">
+                <img
+                  src="public/assets/icon/best-choice/status-up.svg"
+                  alt="status-up"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <!-- Service Title -->
+                <h3
+                  class="font-bold text-[22px] xl:text-[26px] 2xl:text-[30px] text-white"
+                >
+                  AI Automation
+                </h3>
+
+                <!-- Service Description -->
+                <p
+                  class="text-gray-300 font-medium xl:text-[20px] 2xl:text-[24px]"
+                >
+                  Decide the business flow based on latest reports
+                </p>
+              </div>
+
+              <div class="w-full">
+                <a
+                  href="#"
+                  class="text-white xl:text-[18px] 2xl:text-[20px] hover:underline font-semibold"
+                  >Learn More</a
+                >
+              </div>
+            </div>
+
+            <!-- Choice Card -->
+            <div
+              class="bg-white py-[30px] px-6 rounded-2xl flex flex-col gap-8"
+            >
+              <div class="w-full">
+                <img
+                  src="public/assets/icon/best-choice/driver-refresh.svg"
+                  alt="driver-refresh"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <!-- Service Title -->
+                <h3
+                  class="font-bold text-[22px] xl:text-[26px] 2xl:text-[30px] text-black"
+                >
+                  Auto-Scaling
+                </h3>
+
+                <!-- Service Description -->
+                <p
+                  class="text-gray-200 font-medium xl:text-[20px] 2xl:text-[24px]"
+                >
+                  Have a long weekend without worrying any loss
+                </p>
+              </div>
+
+              <div class="w-full">
+                <a
+                  href="#"
+                  class="text-primary xl:text-[18px] 2xl:text-[20px] hover:underline font-semibold"
+                  >Learn More</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ecosystem Section -->
+    <section class="my-16 lg:my-32">
+      <div class="container">
+        <div class="flex flex-col items-center lg:flex-row gap-12 xl:gap-6">
+          <!-- Image -->
+          <div
+            class="w-full sm:w-3/4 lg:w-1/2 xl:w-[45%] 2xl:w-[40%] flex justify-center"
+          >
+            <img
+              src="public/assets/ecosystem-image.png"
+              alt="ecosystem-image"
+            />
+          </div>
+
+          <div class="flex flex-col gap-4 lg:w-1/2">
+            <!-- Section Titlte -->
+            <div class="flex flex-col gap-4 lg:w-[85%]">
+              <!-- Section Main TItle -->
+              <h1
+                class="text-center text-black lg:text-start font-clash font-semibold text-[36px] lg:text-[42px] leading-10"
+              >
+                We Have Very Strong Ecosystem
+              </h1>
+              <!-- Section Sub Title -->
+              <p
+                class="font-medium text-gray-200 lg:leading-[32px] text-center lg:text-start"
+              >
+                We provide a variety of servers to grow your users acquisition
+                much user-friendly and boosting up sales.
+              </p>
+            </div>
+
+            <!-- Stats Container -->
+            <div class="flex flex-col gap-4">
+              <!-- Stats Company Budget Info -->
+              <div
+                class="w-full bg-white flex items-center gap-2 p-5 rounded-2xl"
+              >
+                <!-- Company Budget Icon -->
+                <div class="flex items-center justify-center">
+                  <img
+                    src="public/assets/icon/ecosystem/health.svg"
+                    alt="health"
+                  />
+                </div>
+
+                <!-- Company Budget Info -->
+                <div class="flex flex-col">
+                  <!-- Company Budget Title -->
+                  <h3 class="font-bold text-[20px] text-black">$880 Mio</h3>
+                  <!-- Company Budget Description -->
+                  <p class="text-gray-200 font-medium">Company budget saved</p>
+                </div>
+              </div>
+
+              <!-- Stats Server Available Info -->
+              <div
+                class="w-full bg-white flex items-center gap-2 p-5 rounded-2xl"
+              >
+                <!-- Server Available Icon -->
+                <div class="flex items-center justify-center">
+                  <img
+                    src="public/assets/icon/ecosystem/cpu-charge.svg"
+                    alt="cpu-charge"
+                  />
+                </div>
+
+                <!-- Server Available Info -->
+                <div class="flex flex-col">
+                  <!-- Server Available Title -->
+                  <h3 class="font-bold text-[20px] text-black">450,392</h3>
+                  <!-- Server Available Description -->
+                  <p class="text-gray-200 font-medium">All Server Available</p>
+                </div>
+              </div>
+
+              <!-- Stats Weebsite Running Good Info -->
+              <div
+                class="w-full bg-white flex items-center gap-2 p-5 rounded-2xl"
+              >
+                <!-- Weebsite Running Good Icon -->
+                <div class="flex items-center justify-center">
+                  <img
+                    src="public/assets/icon/ecosystem/cloud-add.svg"
+                    alt="cloud-add"
+                  />
+                </div>
+
+                <!-- Weebsite Running Good Info -->
+                <div class="flex flex-col">
+                  <!-- Weebsite Running Good Title -->
+                  <h3 class="font-bold text-[20px] text-black">189 Mio</h3>
+                  <!-- Weebsite Running Good Description -->
+                  <p class="text-gray-200 font-medium">
+                    Websites are running good
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section Action -->
+            <div
+              class="flex flex-col xs:flex-row xs:justify-center lg:justify-start items-center gap-2 xs:gap-6"
+            >
+              <button
+                class="bg-primary hover:bg-purple transition ease-linear duration-100 rounded-[100px] px-8 py-2 font-bold text-[18px] text-white"
+              >
+                Explore More
+              </button>
+              <a
+                href="#"
+                class="text-primary font-semibold flex items-center underline"
+                ><img
+                  src="public/assets/icon/device-message.svg"
+                  alt="device-message"
+                  class="w-5 h-5"
+                />
+                Schedule a Demo</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="my-16 lg:my-32">
+      <div class="container">
+        <div class="flex flex-col">
+          <!-- Section Title -->
+          <div class="flex flex-col gap-4">
+            <!-- Section Main TItle -->
+            <h1
+              class="text-center text-black font-clash font-semibold text-[36px] lg:text-[42px] leading-10"
+            >
+              Our Showcase
+            </h1>
+            <!-- Section Sub Title -->
+            <p class="font-medium text-gray-200 lg:leading-[32px] text-center">
+              They built amazing website to help more people around the world by
+              using our recommendation services and products
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Image Slider Container -->
+      <div
+        class="mt-7 min-w-full max-w-full overflow-x-scroll flex gap-2 md:gap-4 no-scrollbar"
+      >
+        <!-- Image -->
+        <div
+          class="group w-full xs:w-3/4 sm:w-[65%] md:w-1/2 lg:w-[40%] xl:w-1/4 flex justify-center flex-shrink-0 hover:drop-shadow-xl hover:shadow-primary border-4 border-gray-100 hover:border-purple transition ease-linear duration-150 rounded-2xl"
+        >
+          <img
+            src="public/assets/showcase/image-1.png"
+            alt="image-1"
+            class="w-full"
+          />
+          <button
+            class="scale-0 group-hover:scale-100 absolute bottom-5 bg-primary hover:bg-purple transition ease-linear duration-100 rounded-[100px] px-6 py-2 font-semibold text-[14px] text-white"
+          >
+            View Details
+          </button>
+        </div>
+
+        <!-- Image -->
+        <div
+          class="group w-full xs:w-3/4 sm:w-[65%] md:w-1/2 lg:w-[40%] xl:w-1/4 flex justify-center flex-shrink-0 hover:drop-shadow-xl hover:shadow-primary border-4 border-gray-100 hover:border-purple transition ease-linear duration-150 rounded-2xl"
+        >
+          <img
+            src="public/assets/showcase/image-2.png"
+            alt="image-2"
+            class="w-full"
+          />
+          <button
+            class="scale-0 group-hover:scale-100 absolute bottom-5 bg-primary hover:bg-purple transition ease-linear duration-100 rounded-[100px] px-6 py-2 font-semibold text-[14px] text-white"
+          >
+            View Details
+          </button>
+        </div>
+
+        <!-- Image -->
+        <div
+          class="group w-full xs:w-3/4 sm:w-[65%] md:w-1/2 lg:w-[40%] xl:w-1/4 flex justify-center flex-shrink-0 hover:drop-shadow-xl hover:shadow-primary border-4 border-gray-100 hover:border-purple transition ease-linear duration-150 rounded-2xl"
+        >
+          <img
+            src="public/assets/showcase/image-3.png"
+            alt="image-3"
+            class="w-full"
+          />
+          <button
+            class="scale-0 group-hover:scale-100 absolute bottom-5 bg-primary hover:bg-purple transition ease-linear duration-100 rounded-[100px] px-6 py-2 font-semibold text-[14px] text-white"
+          >
+            View Details
+          </button>
+        </div>
+
+        <!-- Image -->
+        <div
+          class="group w-full xs:w-3/4 sm:w-[65%] md:w-1/2 lg:w-[40%] xl:w-1/4 flex justify-center flex-shrink-0 hover:drop-shadow-xl hover:shadow-primary border-4 border-gray-100 hover:border-purple transition ease-linear duration-150 rounded-2xl"
+        >
+          <img
+            src="public/assets/showcase/image-4.png"
+            alt="image-4"
+            class="w-full"
+          />
+          <button
+            class="scale-0 group-hover:scale-100 absolute bottom-5 bg-primary hover:bg-purple transition ease-linear duration-100 rounded-[100px] px-6 py-2 font-semibold text-[14px] text-white"
+          >
+            View Details
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Secition -->
+    <section
+      class="my-16 pb-[450px] xs:pb-[420px] sm:pb-[475px] lg:pb-[150px] xl:pb-[200px] lg:my-32"
+    >
+      <div class="container">
+        <div class="flex flex-col gap-7 relative">
+          <!-- Section Title -->
+          <div class="flex justify-center">
+            <h1
+              class="text-center text-black font-clash font-semibold text-[36px] lg:text-[42px] leading-10"
+            >
+              Frequently Asked Questions
+            </h1>
+          </div>
+
+          <!-- FAQ Accordion Container -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-5"
+            x-data="{selected: 0}"
+          >
+            <!-- FAQ 1 -->
+            <div class="w-full">
+              <button
+                @click="selected !== 1 ? selected = 1 : selected = null"
+                class="flex flex-col justify-center bg-white text-black p-3 w-full rounded-xl z-50 transition-all ease-linear duration-300"
+              >
+                <!-- Question -->
+                <div class="flex justify-between items-center w-full">
+                  <span class="font-bold text-[14px] text-start"
+                    >Why do we need to use Kapp</span
+                  >
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    class="transition ease-linear duration-150 rounded-[50%]"
+                    :class="{'rotate-180 fill-white bg-black': selected == 1}"
+                  >
+                    <path
+                      d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    ></path>
+                  </svg>
+                </div>
+                <div
+                  x-ref="container"
+                  x-bind:style="selected == 1 ? 'max-height:' + $refs.container.scrollHeight + 'px' : ''"
+                  class="overflow-hidden max-h-0 bg-white flex flex-col items-start transition-all ease-linear duration-300"
+                >
+                  <p class="text-start mt-4">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Velit ipsa voluptates ratione, quaerat aperiam reprehenderit
+                    voluptatem nisi saepe similique rem?
+                  </p>
+                </div>
+              </button>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="w-full">
+              <button
+                @click="selected !== 2 ? selected = 2 : selected = null"
+                class="flex flex-col justify-center bg-white text-black p-3 w-full rounded-xl z-50 transition-all ease-linear duration-300"
+              >
+                <!-- Question -->
+                <div class="flex justify-between items-center w-full">
+                  <span class="font-bold text-[14px] text-start"
+                    >What if data doesn’t get stored?</span
+                  >
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    class="transition ease-linear duration-150 rounded-[50%]"
+                    :class="{'rotate-180 fill-white bg-black': selected == 2}"
+                  >
+                    <path
+                      d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    ></path>
+                  </svg>
+                </div>
+                <div
+                  x-ref="container"
+                  x-bind:style="selected == 2 ? 'max-height:' + $refs.container.scrollHeight + 'px' : ''"
+                  class="overflow-hidden max-h-0 bg-white flex flex-col items-start transition-all ease-linear duration-300"
+                >
+                  <p class="text-start mt-4">
+                    Kapp is able to develop by themselve without removing the parents permission and lorem dolor si amet fully run network at 100% avoiding data-loss at any moments
+                  </p>
+                </div>
+              </button>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="w-full">
+              <button
+                @click="selected !== 3 ? selected = 3 : selected = null"
+                class="flex flex-col justify-center bg-white text-black p-3 w-full rounded-xl z-50 transition-all ease-linear duration-300"
+              >
+                <!-- Question -->
+                <div class="flex justify-between items-center w-full">
+                  <span class="font-bold text-[14px] text-start"
+                    >Do we need to pay 6 months per item?</span
+                  >
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    class="transition ease-linear duration-150 rounded-[50%]"
+                    :class="{'rotate-180 fill-white bg-black': selected == 3}"
+                  >
+                    <path
+                      d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    ></path>
+                  </svg>
+                </div>
+                <div
+                  x-ref="container"
+                  x-bind:class="{ 'max-h-[initial]': selected == 3 }"
+                  x-show="selected == 3"
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0 max-h-0"
+                  x-transition:enter-end="opacity-100 max-h-[initial]"
+                  x-transition:leave="transition ease-out duration-300"
+                  x-transition:leave-start="opacity-100 max-h-[initial]"
+                  x-transition:leave-end="opacity-0 max-h-0"
+                  class="overflow-hidden max-h-0 flex flex-col gap-2 items-start bg-white transition-all ease-linear duration-500"
+                >
+                  <p class="text-start mt-4">
+                    Kapp is able to develop by themselve without removing the
+                    parents permission and lorem dolor si amet fully run network
+                    at 100% avoiding data-loss at any moments
+                  </p>
+
+                  <!-- Learn More -->
+                  <a
+                    href="#"
+                    class=" text-primary font-semibold hover:underline"
+                    >Learn More</a
+                  >
+                </div>
+              </button>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="w-full">
+              <button
+                @click="selected !== 4 ? selected = 4 : selected = null"
+                class="flex flex-col justify-center bg-white text-black p-3 w-full rounded-xl z-50 transition-all ease-linear duration-300"
+              >
+                <!-- Question -->
+                <div class="flex justify-between items-center w-full">
+                  <span class="font-bold text-[14px] text-start"
+                    >Can we guarantee no any loss at all?</span
+                  >
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    class="transition ease-linear duration-150 rounded-[50%]"
+                    :class="{'rotate-180 fill-white bg-black': selected == 4}"
+                  >
+                    <path
+                      d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    ></path>
+                  </svg>
+                </div>
+                <div
+                  x-ref="container"
+                  x-bind:style="selected == 4 ? 'max-height:' + $refs.container.scrollHeight + 'px' : ''"
+                  class="overflow-hidden max-h-0 bg-white flex flex-col items-start transition-all ease-linear duration-300"
+                >
+                  <p class="text-start mt-4">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Velit ipsa voluptates ratione, quaerat aperiam reprehenderit
+                    voluptatem nisi saepe similique rem?
+                  </p>
+                </div>
+              </button>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="w-full">
+              <button
+                @click="selected !== 5 ? selected = 5 : selected = null"
+                class="flex flex-col justify-center bg-white text-black p-3 w-full rounded-xl z-50 transition-all ease-linear duration-300"
+              >
+                <!-- Question -->
+                <div class="flex justify-between items-center w-full">
+                  <span class="font-bold text-[14px] text-start"
+                    >How to migrate from other service?</span
+                  >
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    class="transition ease-linear duration-150 rounded-[50%]"
+                    :class="{'rotate-180 fill-white bg-black': selected == 5}"
+                  >
+                    <path
+                      d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    ></path>
+                  </svg>
+                </div>
+                <div
+                  x-ref="container"
+                  x-bind:style="selected == 5 ? 'max-height:' + $refs.container.scrollHeight + 'px' : ''"
+                  class="overflow-hidden max-h-0 bg-white flex flex-col items-start transition-all ease-linear duration-300"
+                >
+                  <p class="text-start mt-4">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Velit ipsa voluptates ratione, quaerat aperiam reprehenderit
+                    voluptatem nisi saepe similique rem?
+                  </p>
+                </div>
+              </button>
+            </div>
+
+            <!-- Send Mail Button -->
+            <div class="w-full">
+              <button
+                class="w-full bg-black flex items-center justify-between p-3 rounded-xl"
+              >
+                <div class="flex items-center gap-2 w-full">
+                  <svg
+                    width="20"
+                    height="19"
+                    viewBox="0 0 25 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20.5 12.2V13.9C20.5 17.05 18.7 18.4 16 18.4H7C4.3 18.4 2.5 17.05 2.5 13.9V8.5C2.5 5.35 4.3 4 7 4H9.7C9.57 4.38 9.5 4.8 9.5 5.25V9.15002C9.5 10.12 9.82 10.94 10.39 11.51C10.96 12.08 11.78 12.4 12.75 12.4V13.79C12.75 14.3 13.33 14.61 13.76 14.33L16.65 12.4H19.25C19.7 12.4 20.12 12.33 20.5 12.2Z"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M22.5 5.25V9.15002C22.5 10.64 21.74 11.76 20.5 12.2C20.12 12.33 19.7 12.4 19.25 12.4H16.65L13.76 14.33C13.33 14.61 12.75 14.3 12.75 13.79V12.4C11.78 12.4 10.96 12.08 10.39 11.51C9.82 10.94 9.5 10.12 9.5 9.15002V5.25C9.5 4.8 9.57 4.38 9.7 4C10.14 2.76 11.26 2 12.75 2H19.25C21.2 2 22.5 3.3 22.5 5.25Z"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.89999 22H15.1"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M11.5 18.4V22"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M18.9955 7.25H19.0045"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16.1957 7.25H16.2047"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M13.3954 7.25H13.4044"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span
+                    class="text-[11.5px] xs:text-[14px] text-start text-white"
+                    >Send e-mail to us for other questions</span
+                  >
+                </div>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  class="rounded-[50%] -rotate-90 fill-black bg-white"
+                >
+                  <path
+                    d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-full lg:-botto-1/2 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-7 mt-12 bg-primary p-4 lg:p-12 rounded-[40px]"
+          >
+            <div class="flex flex-col items-center lg:items-start gap-4">
+              <!-- Hosting Information  -->
+              <div
+                class="flex items-center justify-center lg:justify-start w-full xs:w-3/4 sm:w-[65%] md:w-1/2 lg:w-3/4 2xl:w-1/2 gap-1 p-2 bg-white rounded-[100px]"
+              >
+                <box-icon name="globe" class="w-5 h-5"></box-icon>
+                <p class="font-semibold text-black text-[11px] md:text-[14px]">
+                  We host more than 120,000 websites
+                </p>
+              </div>
+
+              <!-- Title -->
+              <div
+                class="flex flex-col items-center lg:items-start text-center lg:text-start gap-[10px]"
+              >
+                <!-- Main Title -->
+                <h1
+                  class="font-clash font-semibold text-[28px] md:text-[36px] lg:text-[40px] text-white leading-8"
+                >
+                  Start Growing Today
+                </h1>
+                <!-- Sub Title -->
+                <p
+                  class="font-medium text-white lg:leading-[32px] sm:w-3/4 lg:w-full xl:w-[65%]"
+                >
+                  We provide a variety of servers to grow your users acquisition
+                  much user-friendly and boosting up sales.
+                </p>
+              </div>
+
+              <!-- Action -->
+              <div class="flex flex-col xs:flex-row items-center gap-4">
+                <button
+                  class="bg-[#FFD15A] hover:bg-[#f6c446] transition ease-linear duration-100 rounded-[100px] px-8 py-2 font-bold text-[18px] text-black"
+                >
+                  Explore More
+                </button>
+                <a
+                  href="#"
+                  class="text-white font-semibold flex items-center hover:underline"
+                  ><svg
+                    width="25"
+                    height="24"
+                    viewBox="0 0 25 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20.5 12.2V13.9C20.5 17.05 18.7 18.4 16 18.4H7C4.3 18.4 2.5 17.05 2.5 13.9V8.5C2.5 5.35 4.3 4 7 4H9.7C9.57 4.38 9.5 4.8 9.5 5.25V9.15002C9.5 10.12 9.82 10.94 10.39 11.51C10.96 12.08 11.78 12.4 12.75 12.4V13.79C12.75 14.3 13.33 14.61 13.76 14.33L16.65 12.4H19.25C19.7 12.4 20.12 12.33 20.5 12.2Z"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M22.5 5.25V9.15002C22.5 10.64 21.74 11.76 20.5 12.2C20.12 12.33 19.7 12.4 19.25 12.4H16.65L13.76 14.33C13.33 14.61 12.75 14.3 12.75 13.79V12.4C11.78 12.4 10.96 12.08 10.39 11.51C9.82 10.94 9.5 10.12 9.5 9.15002V5.25C9.5 4.8 9.57 4.38 9.7 4C10.14 2.76 11.26 2 12.75 2H19.25C21.2 2 22.5 3.3 22.5 5.25Z"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.89999 22H15.1"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M11.5 18.4V22"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M18.9955 7.25H19.0045"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16.1957 7.25H16.2047"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M13.3954 7.25H13.4044"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  Schedule a Demo</a
+                >
+              </div>
+            </div>
+
+            <!-- Service Card -->
+            <div
+              class="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6"
+            >
+              <div
+                class="rounded-[26px] p-5 bg-white flex flex-col justify-center items-center gap-2 h-[150px] xs:h-[175px] sm:h-[200px] lg:h-[175px] xl:h-[200px]"
+              >
+                <img
+                  src="public/assets/icon/start-growing/scroll.svg"
+                  alt="scroll"
+                />
+                <h3 class="text-black font-bold text-center leading-5">
+                  Web Crawl
+                </h3>
+              </div>
+              <div
+                class="rounded-[26px] p-5 bg-white flex flex-col justify-center items-center gap-2 h-[150px] xs:h-[175px] sm:h-[200px] lg:h-[175px] xl:h-[200px]"
+              >
+                <img
+                  src="public/assets/icon/start-growing/cpu-charge.svg"
+                  alt="cpu-charge"
+                />
+                <h3 class="text-black font-bold text-center leading-5">
+                  Fast Reports
+                </h3>
+              </div>
+              <div
+                class="relative rounded-[26px] p-5 bg-black flex flex-col justify-center items-center gap-2 h-[150px] xs:h-[175px] sm:h-[200px] lg:h-[175px] xl:h-[200px] before:absolute before:rotate-[32deg] before:h-[80px] before:w-[30px] before:left-20 xs:before:left-32 sm:before:left-48 lg:before:left-20 xl:before:left-28 2xl:before:left-36 before:top-8 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-[12px] before:content-['']"
+              >
+                <img
+                  src="public/assets/icon/start-growing/security-user.svg"
+                  alt="security-user"
+                />
+                <h3 class="text-white font-bold text-center leading-5">
+                  Anti-DDoS
+                </h3>
+                <a
+                  href="#"
+                  class="text-gray-300 text-[14px] text-center hover:underline"
+                  >Learn More</a
+                >
+              </div>
+              <div
+                class="rounded-[26px] p-5 bg-white flex flex-col justify-center items-center gap-2 h-[150px] xs:h-[175px] sm:h-[200px] lg:h-[175px] xl:h-[200px]"
+              >
+                <img
+                  src="public/assets/icon/start-growing/status-up.svg"
+                  alt="status-up"
+                />
+                <h3 class="text-black font-bold text-center leading-5">
+                  Auto-Scale
+                </h3>
+              </div>
+              <div
+                class="rounded-[26px] p-5 bg-white flex flex-col justify-center items-center gap-2 h-[150px] xs:h-[175px] sm:h-[200px] lg:h-[175px] xl:h-[200px]"
+              >
+                <img
+                  src="public/assets/icon/start-growing/candle.svg"
+                  alt="candle"
+                />
+                <h3 class="text-black font-bold text-center leading-5">
+                  AI Preform
+                </h3>
+              </div>
+              <div
+                class="rounded-[26px] p-5 bg-white flex flex-col justify-center items-center gap-2 h-[150px] xs:h-[175px] sm:h-[200px] lg:h-[175px] xl:h-[200px]"
+              >
+                <img
+                  src="public/assets/icon/start-growing/crown.svg"
+                  alt="crown"
+                />
+                <h3 class="text-black font-bold text-center leading-5">
+                  Top Plugins+
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="mt-16 lg:mt-32 pt-[450px] xs:pt-[420px] sm:pt-[475px] lg:pt-[300px] pb-4 bg-black"
+    >
+      <div class="container">
+        <div class="flex flex-col gap-12">
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-[60px]">
+            <!-- Branding and Description -->
+            <div class="flex flex-col gap-7">
+              <!-- Logo -->
+              <div class="w-full flex items-center gap-1">
+                <img
+                  src="public/assets/icon/logo.svg"
+                  alt="logo"
+                  class="w-10 h-10 lg:w-8 lg:h-8"
+                />
+                <h1 class="font-bold text-[24px] lg:text-[22px] text-white">
+                  weserve.
+                </h1>
+              </div>
+              <!-- Description -->
+              <p class="text-gray-300 font-medium leading-7 sm:w-1/2 lg:w-full">
+                We host your empire business today using the latest
+                technologies.
+              </p>
+
+              <!-- Social Media & Contact -->
+              <div class="w-full flex gap-4">
+                <div class="p-2 rounded-[50%] bg-white">
+                  <img src="public/assets/icon/footer/sms.svg" alt="sms" />
+                </div>
+                <div class="p-2 rounded-[50%] bg-white">
+                  <img
+                    src="public/assets/icon/footer/global.svg"
+                    alt="global"
+                  />
+                </div>
+                <div class="p-2 rounded-[50%] bg-white">
+                  <img src="public/assets/icon/footer/call.svg" alt="call" />
+                </div>
+                <div class="p-2 rounded-[50%] bg-white">
+                  <img
+                    src="public/assets/icon/footer/video-play.svg"
+                    alt="video-play"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Product Section -->
+            <div class="flex flex-col gap-7">
+              <h3 class="text-white font-bold text-[18px]">Products</h3>
+              <ul class="flex flex-col gap-4">
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Powerfull Reports</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Blockchain</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Auto-Backup</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Data Science</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Auto-Scaling Up</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Resources Section -->
+            <div class="flex flex-col gap-7">
+              <h3 class="text-white font-bold text-[18px]">Resources</h3>
+              <ul class="flex flex-col gap-4">
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Support 24/7</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Help Center</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >How-to Instructions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Blog & Tips</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >About Us</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Company Section -->
+            <div class="flex flex-col gap-7">
+              <h3 class="text-white font-bold text-[18px]">Company</h3>
+              <ul class="flex flex-col gap-4">
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Privacy and Policy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Terms and Conditions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Investor Relations</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Join With Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="font-medium text-gray-300 hover:text-gray-100 transition ease-linear duration-150"
+                    >Our Statistics</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Copyright -->
+          <div class="w-full">
+            <p class="font-medium text-gray-300 text-center">
+              All Rights Reserved • Copyright Weserve by BuildWithAngga 2024 in
+              Bandung
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

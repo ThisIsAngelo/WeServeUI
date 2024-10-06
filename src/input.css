@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("../public/fonts/ClashDisplay-Variable.ttf");
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #F1F4F5;
+}
+
+.bg-gradient-radial {
+ background: rgb(255,255,255);
+ background: radial-gradient(circle, rgba(255,255,255,1) 1%, rgba(5,2,17,0) 87%);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
